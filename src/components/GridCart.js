@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MediaSelection from './MediaSelection';
 import Sider from './Sider';
+
+//some npm packages to check the extension of url
 
 const isAudio = require('is-audio');
 const isImage = require('is-image');
@@ -12,15 +13,13 @@ const isVideo = require('is-video');
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    margin: 0
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
+
 }));
 
 export default function FullWidthGrid() {
+  const classes = useStyles();
   const [televisao, setTelevisao] = useState(true);
   const [radio, setRadio] = useState(true);
   const [video, setVideo] = useState(true);
@@ -28,21 +27,24 @@ export default function FullWidthGrid() {
   const [mobile, setMobile] = useState(true);
   const [input, setInput] = useState(true);
 
-  const classes = useStyles();
-
-  const teste = (e) => {
+  //check the url extensions to manage state
+  const turnOnButtons = (e) => {
     setTelevisao(!isVideo(e));
     setRadio(!isAudio(e));
     setVideo(!isVideo(e));
     setWeb(!isVideo(e) && !isImage(e));
     setMobile(!isImage(e) && !isVideo(e));
   }
+
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={10}>
+      <Grid 
+        container
+        direction='row'
+        spacing={0}>
+        <Grid item sm={12} md={8} lg={10}>
           <MediaSelection 
-            teste={teste}
+            turnOnButtons={turnOnButtons}
             input={input} 
             televisao={televisao}
             video={video}
@@ -51,7 +53,7 @@ export default function FullWidthGrid() {
             mobile={mobile} 
           />
         </Grid>
-        <Grid item xs={12} sm={2}>
+        <Grid item sm={12} md={4} lg={2}>
         <Sider
           input={input} 
           televisao={televisao}
@@ -61,7 +63,6 @@ export default function FullWidthGrid() {
           mobile={mobile} 
         />
         </Grid>
-        
       </Grid>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css';
-import Cart from './components/Cart';
+import PageStructure from './components/PageStructure';
 
-ReactDOM.render(<Cart/>, document.getElementById("root"));
+ReactDOM.render(<PageStructure/>, document.getElementById("root"));

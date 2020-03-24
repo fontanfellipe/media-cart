@@ -10,6 +10,14 @@ module.exports = {
     module: {
       rules: [
         {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            },
+          ],
+        },
+        {
             test: /\.m?js$/,
             exclude: /(node_modules|bower_components)/,
             use: {
@@ -17,13 +25,29 @@ module.exports = {
                 options: {
                 presets: ['@babel/preset-env']
                 }
-            }
+            },
+            
         }
         , {
 
           test: /\.s?css$/i,
           use: ['style-loader', 'css-loader', 'sass-loader'],
-        },
+        }, 
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: "babel-loader"
+            },
+            {
+              loader: "react-svg-loader",
+              options: {
+                jsx: true // true outputs JSX tags
+              }
+            }
+          ]
+        }
+  
       ],
     },
     devtool: 'cheap-module-eval-source-map',
