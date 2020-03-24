@@ -4,9 +4,20 @@ import Grid from '@material-ui/core/Grid';
 import MediaSelection from './MediaSelection';
 import Sider from './Sider';
 
+
+const isAudio = (e) => {
+  'use strict';
+  const path = require('path');
+  const audioExtensions = require('audio-extensions');
+  
+  const extensions = new Set(audioExtensions);
+  
+  module.exports = filePath => extensions.has(path.extname(filePath).slice(1).toLowerCase());  
+}
+
 //some npm packages to check the extension of url
 
-const isAudio = require('is-audio');
+//const isAudio = require('is-audio');
 const isImage = require('is-image');
 const isVideo = require('is-video');
 
