@@ -249,6 +249,7 @@ function MediaSelection(props) {
                         <div>
                             <MediaScreen
                                 URL={URL}
+                                //isImage={props.isImage()}
                             />
                         </div>
                         <div className={classes.endButton}>

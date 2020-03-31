@@ -1,22 +1,14 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-
-const isImage = require('is-image');
-
-import Screenplay from '../assets/play-button.png';
+import imageExtensions from '../lists/imageExtensions.json';
 
 const useStyles = makeStyles(theme => ({
-    
   playerWrapper : {
     position: 'relative',
     paddingTop: '56.25%' /* Player ratio: 100 / (1280 / 720) */
   },
-   
   reactPlayer : {
     position: 'absolute',
     top: 0,
@@ -29,10 +21,6 @@ const useStyles = makeStyles(theme => ({
     width: '600px',
     margin: 'auto',
     paddingBottom: '20px'
-    
-    //height: '140px',
-  
-   
   },
   img :{
     maxWidth: '100%',
@@ -44,6 +32,12 @@ const useStyles = makeStyles(theme => ({
 function MediaScreen(props) {
 
   const classes = useStyles(); 
+
+  const isImage = (e) => {
+    const ext = e.substr(e.lastIndexOf('.'));
+    if(imageExtensions.includes(ext))
+        return true 
+  }
 
     return (
       <Grid
@@ -62,8 +56,6 @@ function MediaScreen(props) {
           />
         }
       </Grid>
-      
-      
     )
  
 }
@@ -71,20 +63,3 @@ function MediaScreen(props) {
 export default MediaScreen;
 
 
-
-{/* <Grid
-container
-direction="row"
-justify="center"
-alignItems="center"
-className={classes.screenplayBox}
->
-{(isImage(props.URL)) ? 
-  <Grid
-    direction="row"
-    justify="center"
-    alignItems="center"
-    className={classes.screenplayBox}
-  >
-    <img className={classes.img} src={props.URL}/>
-  </Grid> : */}

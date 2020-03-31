@@ -3,23 +3,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MediaSelection from './MediaSelection';
 import Sider from './Sider';
+import audioExtensions from '../lists/audioExtensions.json';
+import imageExtensions from '../lists/imageExtensions.json';
+import videoExtensions from  '../lists/videoExtensions.json';
+
+//const path = require('path');
+//const isImage = require('is-image');
+//const isVideo = require('is-video');
 
 
-const isAudio = (e) => {
-  'use strict';
-  const path = require('path');
-  const audioExtensions = require('audio-extensions');
-  
-  const extensions = new Set(audioExtensions);
-  
-  module.exports = filePath => extensions.has(path.extname(filePath).slice(1).toLowerCase());  
-}
 
 //some npm packages to check the extension of url
 
 //const isAudio = require('is-audio');
-const isImage = require('is-image');
-const isVideo = require('is-video');
+
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,6 +36,24 @@ export default function FullWidthGrid() {
   const [mobile, setMobile] = useState(true);
   const [input, setInput] = useState(true);
 
+  //extensionCheckers
+  const isAudio = (e) => {
+    const ext = e.substr(e.lastIndexOf('.'));
+    if(audioExtensions.includes(ext))
+        return true 
+  }
+  const isVideo = (e) => {
+    const ext = e.substr(e.lastIndexOf('.'));
+    if(videoExtensions.includes(ext))
+        return true 
+  }
+  const isImage = (e) => {
+    const ext = e.substr(e.lastIndexOf('.'));
+    if(imageExtensions.includes(ext))
+        return true 
+  }
+
+
   //check the url extensions to manage state
   const turnOnButtons = (e) => {
     setTelevisao(!isVideo(e));
@@ -46,7 +62,6 @@ export default function FullWidthGrid() {
     setWeb(!isVideo(e) && !isImage(e));
     setMobile(!isImage(e) && !isVideo(e));
   }
-
   return (
     <div className={classes.root}>
       <Grid 
@@ -61,7 +76,8 @@ export default function FullWidthGrid() {
             video={video}
             web={web}
             radio={radio}
-            mobile={mobile} 
+            mobile={mobile}
+            //isImage={isImage} 
           />
         </Grid>
         <Grid item sm={12} md={4} lg={2}>
