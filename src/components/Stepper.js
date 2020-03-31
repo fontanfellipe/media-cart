@@ -77,7 +77,6 @@ export default function NestedGrid() {
         >
           <Typography variant='body2' style={{fontWeight:'800'}}>Anúncio/formato</Typography>
         </Grid>
-
       </React.Fragment>
     );
   }

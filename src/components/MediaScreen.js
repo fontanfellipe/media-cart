@@ -2,7 +2,6 @@ import React from 'react';
 import ReactPlayer from 'react-player';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import imageExtensions from '../lists/imageExtensions.json';
 
 const useStyles = makeStyles(theme => ({
   playerWrapper : {
@@ -30,33 +29,26 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function MediaScreen(props) {
-
   const classes = useStyles(); 
 
-  const isImage = (e) => {
-    const ext = e.substr(e.lastIndexOf('.'));
-    if(imageExtensions.includes(ext))
-        return true 
-  }
-
-    return (
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        className={classes.screenplayBox}
-        >
-        {(isImage(props.URL)) ? 
-          <img className={classes.img} src={props.URL}/>
-          :
-          <ReactPlayer 
-            url={props.URL} 
-            controls={true}  
-          />
-        }
-      </Grid>
-    )
+  return (
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      className={classes.screenplayBox}
+      >
+      {(props.isImage(props.URL)) ? 
+        <img className={classes.img} src={props.URL}/>
+        :
+        <ReactPlayer 
+          url={props.URL} 
+          controls={true}  
+        />
+      }
+    </Grid>
+  )
  
 }
 

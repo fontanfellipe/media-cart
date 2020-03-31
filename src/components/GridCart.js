@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import MediaSelection from './MediaSelection';
-import Sider from './Sider';
 import audioExtensions from '../lists/audioExtensions.json';
 import imageExtensions from '../lists/imageExtensions.json';
 import videoExtensions from  '../lists/videoExtensions.json';
+import GridCartUI from './GridCartUI';
 
-//const path = require('path');
-//const isImage = require('is-image');
-//const isVideo = require('is-video');
-
-
-
-//some npm packages to check the extension of url
-
-//const isAudio = require('is-audio');
-
-
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    margin: 0
-  },
-
-}));
-
-export default function FullWidthGrid() {
-  const classes = useStyles();
+export default function GridCart() {
+  //states
   const [televisao, setTelevisao] = useState(true);
   const [radio, setRadio] = useState(true);
   const [video, setVideo] = useState(true);
@@ -52,8 +29,6 @@ export default function FullWidthGrid() {
     if(imageExtensions.includes(ext))
         return true 
   }
-
-
   //check the url extensions to manage state
   const turnOnButtons = (e) => {
     setTelevisao(!isVideo(e));
@@ -63,34 +38,17 @@ export default function FullWidthGrid() {
     setMobile(!isImage(e) && !isVideo(e));
   }
   return (
-    <div className={classes.root}>
-      <Grid 
-        container
-        direction='row'
-        spacing={0}>
-        <Grid item sm={12} md={8} lg={10}>
-          <MediaSelection 
-            turnOnButtons={turnOnButtons}
-            input={input} 
-            televisao={televisao}
-            video={video}
-            web={web}
-            radio={radio}
-            mobile={mobile}
-            //isImage={isImage} 
-          />
-        </Grid>
-        <Grid item sm={12} md={4} lg={2}>
-        <Sider
-          input={input} 
-          televisao={televisao}
-          video={video}
-          web={web}
-          radio={radio}
-          mobile={mobile} 
-        />
-        </Grid>
-      </Grid>
+    <div>
+      <GridCartUI
+        turnOnButtons={turnOnButtons}
+        input={input} 
+        televisao={televisao}
+        video={video}
+        web={web}
+        radio={radio}
+        mobile={mobile}
+        isImage={isImage}
+      />
     </div>
   );
 }
